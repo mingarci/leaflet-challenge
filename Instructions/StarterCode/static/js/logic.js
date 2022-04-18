@@ -64,3 +64,32 @@ function createMap(earthquakes) {
   }).addTo(myMap);
 
 }
+
+//* Loop through the cities array, and create one marker for each city object.
+// for (var i = 0; i < countries.length; i++) {
+
+//     // Conditionals for country points
+//     var color = "";
+//     if (countries[i].points > 200) {
+//       color = "yellow";
+//     }
+//     else if (countries[i].points > 100) {
+//       color = "blue";
+//     }
+//     else if (countries[i].points > 90) {
+//       color = "green";
+//     }
+//     else {
+//       color = "red";
+//     }
+  
+//     // Add circles to the map.
+//     L.circle(countries[i].location, {
+//       fillOpacity: 0.75,
+//       color: "white",
+//       fillColor: color,
+//       // Adjust the radius.
+//       radius: Math.sqrt(countries[i].points) * 10000
+//     }).bindPopup(`<h1>${countries[i].name}</h1> <hr> <h3>Points: ${countries[i].points}</h3>`).addTo(myMap);
+//   }
+  
