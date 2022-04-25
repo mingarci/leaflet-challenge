@@ -47,6 +47,8 @@ function createMap(earthquakes) {
     Earthquakes: earthquakes
   };
 
+
+
   // Create our map, giving it the streetmap and earthquakes layers to display on load.
   var myMap = L.map("map", {
     center: [
@@ -56,12 +58,33 @@ function createMap(earthquakes) {
     layers: [street, earthquakes]
   });
 
+// Define a markerSize() function that will give each city a different radius based on its population.
+function markerSize(mag) {
+  return Math.sqrt(mag) * 50;
+}
+
+
+  
+ // Loop through the cities array, and create one marker for each city object.
+ for (var i = 0; i < cities.length; i++) {
+  L.circle(properties[i].place, {
+    fillOpacity: 0.75,
+    color: "white",
+    fillColor: "purple",
+    // Setting our circle's radius to equal the output of our markerSize() function:
+    // This will make our marker's size proportionate to its population.
+    radius: markerSize(properties[i].m/15)
+  }).bindPopup(`<h1>${properties[i].name}</h1> <hr> <h3>mag: ${properties[i].m.toLocaleString()}</h3>`).addTo(myMap);
+}
+
   // Create a layer control.
   // Pass it our baseMaps and overlayMaps.
   // Add the layer control to the map.
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
+  
+ 
 
 }
 
