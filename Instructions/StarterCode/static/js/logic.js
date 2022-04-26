@@ -87,32 +87,41 @@ function markerSize(mag) {
  
 
 }
+function createFeatures(earthquakeData) {
+  function onEachFeature(feature, layer) {
+      layer.bindPopup('<h4>Place: ' + feature.properties.place + '</h4><h4>Date: ' + new Date(feature.properties.time) + '</h4><h4>Magnitude: ' + feature.properties.mag + '</h4><h4>USGS Event Page: <a href=' + feature.properties.url + " target='_blank'>Click here</a></h4>", {maxWidth: 400})
+  }
 
-//* Loop through the cities array, and create one marker for each city object.
-// for (var i = 0; i < countries.length; i++) {
+  const layerToMap = L.geoJSON(earthquakeData, {
+      onEachFeature: onEachFeature,
+      pointToLayer: function(feature, latlng) {
+          let radius = feature.properties.mag * 4.5;
 
-//     // Conditionals for country points
-//     var color = "";
-//     if (countries[i].points > 200) {
-//       color = "yellow";
-//     }
-//     else if (countries[i].points > 100) {
-//       color = "blue";
-//     }
-//     else if (countries[i].points > 90) {
-//       color = "green";
-//     }
-//     else {
-//       color = "red";
-//     }
-  
-//     // Add circles to the map.
-//     L.circle(countries[i].location, {
-//       fillOpacity: 0.75,
-//       color: "white",
-//       fillColor: color,
-//       // Adjust the radius.
-//       radius: Math.sqrt(countries[i].points) * 10000
-//     }).bindPopup(`<h1>${countries[i].name}</h1> <hr> <h3>Points: ${countries[i].points}</h3>`).addTo(myMap);
-//   }
-  
+          if (feature.properties.mag > 5) {
+              fillcolor = 'red';
+          }
+          else if (feature.properties.mag >= 4) {
+              fillcolor = 'orange';
+          }
+          else if (feature.properties.mag >= 3) {
+              fillcolor = 'green';
+          }
+          else if (feature.properties.mag >= 2) {
+              fillcolor = 'blue';
+          }
+          else if (feature.properties.mag >= 1) {
+              fillcolor = 'purple';
+          }
+          else  fillcolor = 'cyan';
+
+          return L.circleMarker(latlng, {
+              radius: radius,
+              color: 'black',
+              fillColor: fillcolor,
+              fillOpacity: 1,
+              weight: 1
+          });
+      }
+  });
+  createMap(layerToMap);
+}
