@@ -98,21 +98,21 @@ function createFeatures(earthquakeData) {
           let radius = feature.properties.mag * 4.5;
 
           if (feature.properties.mag > 5) {
-              fillcolor = '#477AC2';
+              fillcolor = '#f27b68';
           }
           else if (feature.properties.mag >= 4) {
-              fillcolor = 'orange';
+              fillcolor = '#f79757';
           }
           else if (feature.properties.mag >= 3) {
-              fillcolor = 'green';
+              fillcolor = '#81f7ed';
           }
           else if (feature.properties.mag >= 2) {
-              fillcolor = 'blue';
+              fillcolor = '#60a9bd';
           }
           else if (feature.properties.mag >= 1) {
-              fillcolor = 'purple';
+              fillcolor = '#bcb0cf';
           }
-          else  fillcolor = 'cyan';
+          else  fillcolor = '#d0a9d6';
 
           return L.circleMarker(latlng, {
               radius: radius,
@@ -128,14 +128,15 @@ function createFeatures(earthquakeData) {
 /*Legend specific*/
 var legend = L.control({ position: "bottomright" });
 
-legend.onAdd = function(map) {
+legend.onAdd = function(myMap) {
   var div = L.DomUtil.create("div", "legend");
   div.innerHTML += "<h4>Tegnforklaring</h4>";
-  div.innerHTML += '<i style="background: #477AC2"></i><span>Water</span><br>';
-  div.innerHTML += '<i style="background: #448D40"></i><span>Forest</span><br>';
-  div.innerHTML += '<i style="background: #E6E696"></i><span>Land</span><br>';
-  div.innerHTML += '<i style="background: #E8E6E0"></i><span>Residential</span><br>';
-  div.innerHTML += '<i style="background: #FFFFFF"></i><span>Ice</span><br>';
+  div.innerHTML += '<i style="background: #f27b68"></i><span>Water</span><br>';
+  div.innerHTML += '<i style="background: #f79757"></i><span>Forest</span><br>';
+  div.innerHTML += '<i style="background: #81f7ed"></i><span>Land</span><br>';
+  div.innerHTML += '<i style="background: #60a9bd"></i><span>Residential</span><br>';
+  div.innerHTML += '<i style="background: #bcb0cf"></i><span>Ice</span><br>';
+  div.innerHTML += '<i style="background: #d0a9d6"></i><span>Ice</span><br>';
   
   
   
@@ -143,4 +144,4 @@ legend.onAdd = function(map) {
   return div;
 };
 
-legend.addTo(map);
+legend.addTo(myMap);
