@@ -125,6 +125,7 @@ function createFeatures(earthquakeData) {
   });
   createMap(layerToMap);
 }
+
 /*Legend specific*/
 var legend = L.control({ position: "bottomright" });
 
