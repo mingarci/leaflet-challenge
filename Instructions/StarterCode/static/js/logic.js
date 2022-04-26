@@ -89,7 +89,7 @@ function markerSize(mag) {
 }
 function createFeatures(earthquakeData) {
   function onEachFeature(feature, layer) {
-      layer.bindPopup('<h4>Place: ' + feature.properties.place + '</h4><h4>Date: ' + new Date(feature.properties.time) + '</h4><h4>Magnitude: ' + feature.properties.mag + '</h4><h4>USGS Event Page: <a href=' + feature.properties.url + " target='_blank'>Click here</a></h4>", {maxWidth: 400})
+      layer.bindPopup('<h4>Place: ' + feature.properties.place + '</h4><h4>Date: ' + new Date(feature.properties.time) + '</h4><h4>Magnitude: ' + feature.properties.mag + {maxWidth: 400})
   }
 
   const layerToMap = L.geoJSON(earthquakeData, {
@@ -98,7 +98,7 @@ function createFeatures(earthquakeData) {
           let radius = feature.properties.mag * 4.5;
 
           if (feature.properties.mag > 5) {
-              fillcolor = 'red';
+              fillcolor = '#477AC2';
           }
           else if (feature.properties.mag >= 4) {
               fillcolor = 'orange';
@@ -125,3 +125,22 @@ function createFeatures(earthquakeData) {
   });
   createMap(layerToMap);
 }
+/*Legend specific*/
+var legend = L.control({ position: "bottomright" });
+
+legend.onAdd = function(map) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Tegnforklaring</h4>";
+  div.innerHTML += '<i style="background: #477AC2"></i><span>Water</span><br>';
+  div.innerHTML += '<i style="background: #448D40"></i><span>Forest</span><br>';
+  div.innerHTML += '<i style="background: #E6E696"></i><span>Land</span><br>';
+  div.innerHTML += '<i style="background: #E8E6E0"></i><span>Residential</span><br>';
+  div.innerHTML += '<i style="background: #FFFFFF"></i><span>Ice</span><br>';
+  
+  
+  
+
+  return div;
+};
+
+legend.addTo(map);
